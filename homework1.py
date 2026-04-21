@@ -82,6 +82,8 @@ def detect_anomalies(
             key = f"{node_name}/day{day_index}.log"
             counts = file_counts[key]
             for code in string.ascii_uppercase:
+                if other_file_count <= 0:
+                    continue
                 other_total = overall_totals[code] - node_totals[node_name][code]
                 average = other_total / other_file_count
                 if average > 0 and counts.get(code, 0) > k * average:
